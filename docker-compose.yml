@@ -24,11 +24,11 @@ services:
       - network-backend
   
   mongo:
-    build: ./backend-mongo   # 👈 instead of image: mongo
+    build: ./backend-mongo  
     image: docker-frontend-backend-db-mongo
     restart: always
     volumes: 
-      - mongodb_data:/data/db
+      - ./backend-mongo/data:/data/db
     environment: 
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: adminhackp2025
