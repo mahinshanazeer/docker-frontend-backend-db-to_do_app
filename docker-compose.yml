@@ -24,16 +24,14 @@ services:
       - network-backend
   
   mongo:
-    image: mongo
+    build: ./backend-mongo   # 👈 instead of image: mongo
+    image: docker-frontend-backend-db-mongo
     restart: always
     volumes: 
       - mongodb_data:/data/db
     environment: 
-      MONGODB_INITDB_ROOT_USERNAME: username
-      MONGODB_INITDB_ROOT_PASSWORD: password
-    # uncomment following lines to access db locally
-    # ports:
-    #   - 27017:27017
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminhackp2025
     networks: 
       - network-backend
 
