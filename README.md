@@ -21,3 +21,5 @@ fa0f1ca1c84d   docker-frontend-backend-db-web   "docker-entrypoint.s…"   8 min
 76ea499a4471   docker-frontend-backend-db-api   "docker-entrypoint.s…"   8 minutes ago   Up 8 minutes   0.0.0.0:3001->3001/tcp, [::]:3001->3001/tcp   docker-frontend-backend-db-api-1
 96e05160e1c9   mongo                            "docker-entrypoint.s…"   8 minutes ago   Up 8 minutes   27017/tcp                                     docker-frontend-backend-db-mongo-1
 ~~~ 
+
+Total APIs 6
