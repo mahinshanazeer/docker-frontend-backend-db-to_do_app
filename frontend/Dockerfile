@@ -1,16 +1,32 @@
-FROM node:14-alpine
+# ---------- Build Stage ----------
+FROM node:16-alpine AS build
 
 WORKDIR /app
 
-# add '/app/node_modules/.bin' to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-# install application dependencies
+# Copy dependency files first
 COPY package*.json ./
-RUN npm install
-# RUN npm install react-scripts -g
 
-# copy app files
+# Install dependencies
+RUN npm install --legacy-peer-deps
+
+# Copy rest of the app
 COPY . .
 
-EXPOSE 3000
-CMD ["npm", "start"]
+# Build the React app
+RUN npm run build
+
+
+# ---------- Production Stage ----------
+FROM nginx:alpine
+
+# Copy custom nginx config if you have one
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy build output from build stage
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
